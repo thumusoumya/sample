@@ -7,7 +7,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,800;1,500&family=Poppins:wght@300;400;500;600;700&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
 <style>
 /* =========================================================
-   UNSAID — "Golden Hour" surprise for Koushik (Bablu)
+   UNSAID — "Golden Hour" surprise for Koushik (Bobby)
    ========================================================= */
 :root{
   --or:#ff7a1a; --or2:#ffa45c; --or3:#e2560b; --peach:#ffd9bd;
@@ -211,7 +211,7 @@ h1 em{font-style:italic;font-weight:500;color:var(--or3)}
 .bline{font-family:'Playfair Display';font-style:italic;font-size:18px;line-height:1.45;padding:0 20px;opacity:0;transition:opacity 1s 1.4s}
 .bloom .bline{opacity:1}
 
-/* ---------- 11. BABLU ---------- */
+/* ---------- 11. BOBBY ---------- */
 .slots,.tiles{display:flex;gap:9px;justify-content:center;margin-top:18px}
 .slot{width:54px;height:64px;border-radius:14px;border:2px dashed rgba(226,86,11,.4);display:grid;place-items:center;font:800 28px 'Playfair Display';color:var(--or3);background:rgba(255,255,255,.5);cursor:pointer}
 .slot.f{border-style:solid;background:#fff}
@@ -413,8 +413,8 @@ h1 em{font-style:italic;font-weight:500;color:var(--or3)}
     <button class="btn" id="sNext" hidden>One last puzzle →</button>
   </section>
 
-  <!-- 11. BABLU PUZZLE -->
-  <section class="screen" id="s-bablu">
+  <!-- 11. BOBBY PUZZLE -->
+  <section class="screen" id="s-bobby">
     <div class="tag rv">Final puzzle 🧩</div>
     <h1 class="rv" style="--d:.1s">Spell the name <em>only we</em> call you</h1>
     <p class="sub rv" style="--d:.2s" id="uSub">Tap the letters in the right order</p>
@@ -440,7 +440,7 @@ h1 em{font-style:italic;font-weight:500;color:var(--or3)}
   <!-- 13. FINAL CARD -->
   <section class="screen" id="s-final">
     <div class="tag rv">The last surprise</div>
-    <h1 class="rv" style="--d:.1s">One more thing, <em id="fName">Bablu</em>…</h1>
+    <h1 class="rv" style="--d:.1s">One more thing, <em id="fName">Bobby</em>…</h1>
     <div class="book rv" id="book" style="--d:.2s">
       <div class="cover" id="cover">
         <div style="font-size:12px;letter-spacing:.3em;opacity:.85">FOR</div>
@@ -464,7 +464,7 @@ h1 em{font-style:italic;font-weight:500;color:var(--or3)}
    ========================================================= */
 const FILM = {
   name: "Koushik",
-  nick: "Bablu",
+  nick: "Bobby",
   password: "POWER PATEL",                     // spaces / caps don't matter
   hint: "What everyone calls you 😏 (2 words)",
   photos: ["sample image1", "sample image2", "sample image3", "sample image4"],   // exact file names (.jpeg/.jpg/.png auto)
@@ -503,7 +503,7 @@ const FILM = {
 
   bloomLine: "You make ordinary days feel like a trip to Pondicherry 🌊🧡",
 
-  babluLine: "The name only your favourite people get to use 🧡",
+  bobbyLine: "The name only your favourite people get to use 🧡",
 
   // emotional friends moment (photo 4)
   friendsTitle: "And these idiots… <em style='color:#ffb36b'>your people</em> 🫂",
@@ -622,7 +622,7 @@ let tT;
 function toast(t) { const el = $("#toast"); el.textContent = t; el.classList.add("on"); clearTimeout(tT); tT = setTimeout(() => el.classList.remove("on"), 1800); }
 
 /* ---------- navigation ---------- */
-const ORDER = ["lock", "pass", "balloon", "card", "hearts", "game", "letter", "dots", "quiz", "bloom", "bablu", "frnds", "final"];
+const ORDER = ["lock", "pass", "balloon", "card", "hearts", "game", "letter", "dots", "quiz", "bloom", "bobby", "frnds", "final"];
 const E = {};
 function prog() {
   const p = $("#prog"), i = ORDER.indexOf(cur);
@@ -852,7 +852,7 @@ function answer(b, q) {
   au(); const o = b.textContent;
   if (b.classList.contains("ok")) return;
   if (!q.ans.includes(o)) {
-    b.classList.add("no"); bad(); toast(["Seriously? 😑", "Wrong, Bablu 😏", "Think again 👀"][Math.floor(Math.random() * 3)]);
+    b.classList.add("no"); bad(); toast(["Seriously? 😑", "Wrong, Bobby 😏", "Think again 👀"][Math.floor(Math.random() * 3)]);
     setTimeout(() => b.classList.remove("no"), 700); return;
   }
   b.classList.add("ok"); picks.push(o); tone(880, .2, "sine", .08);
@@ -908,13 +908,13 @@ function bloomNow() {
   setTimeout(() => { const [x, y] = at($("#scr")); burst(x, y, 90); rain("🌸", 18); }, 900);
   setTimeout(() => show($("#sNext")), 2600);
 }
-$("#sNext").onclick = () => go("bablu");
+$("#sNext").onclick = () => go("bobby");
 
-/* =========== 11. BABLU PUZZLE =========== */
+/* =========== 11. BOBBY PUZZLE =========== */
 const NICK = FILM.nick.toUpperCase();
 let typed = [];
-$("#uLine").textContent = FILM.babluLine;
-function buildBablu() {
+$("#uLine").textContent = FILM.bobbyLine;
+function buildBobby() {
   typed = [];
   $("#slots").innerHTML = [...NICK].map(() => `<div class="slot"></div>`).join("");
   let L; do { L = [...NICK].sort(() => Math.random() - .5); } while (L.join("") === NICK);
@@ -933,7 +933,7 @@ function placeL(t) {
 }
 function removeL(i) { if (i !== typed.length - 1 || $("#slots").classList.contains("win")) return; typed.pop().t.classList.remove("used"); paintSlots(); }
 function clearL() { typed.forEach(o => o.t.classList.remove("used")); typed = []; paintSlots(); }
-function babluWin() {
+function bobbyWin() {
   $("#slots").classList.add("win"); $("#tiles").hidden = true; $("#uClear").hidden = true;
   $("#uSub").textContent = "You got it 🥹";
   $("#uBig").textContent = FILM.nick + " 🧡";
@@ -941,7 +941,7 @@ function babluWin() {
   setTimeout(() => show($("#uDone")), 900);
 }
 $("#uClear").onclick = clearL;
-E.bablu = () => { if (!$("#slots").children.length) buildBablu(); };
+E.bobby = () => { if (!$("#slots").children.length) buildBobby(); };
 $("#uNext").onclick = () => go("frnds");
 
 /* =========== 12. FRIENDS (emotional) =========== */
