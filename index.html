@@ -295,11 +295,6 @@ h1 em{font-style:italic;font-weight:500;color:var(--or3)}
         <div class="bb">K</div>
         <svg width="20" height="150" viewBox="0 0 20 150"><path d="M10 0 Q0 25 10 50 T10 100 T10 150" stroke="#b8774a" stroke-width="1.6" fill="none"/></svg>
       </div>
-      <div id="popMsg" hidden style="padding-top:110px">
-        <div class="big" style="font-size:46px">POP! 🎉</div>
-        <p class="sub" style="margin-top:8px">Okay okay… now there's a card flying around 💌</p>
-        <button class="btn" id="bNext">Find the card →</button>
-      </div>
     </div>
   </section>
 
@@ -670,9 +665,9 @@ $("#balloon").onclick = () => {
   const [x, y] = at(b.querySelector(".bb"));
   b.classList.add("gone"); $("#bRing").hidden = true; popSnd(); burst(x, y, 110); rain("🧡", 16);
   $("#bSub").textContent = "";
-  setTimeout(() => { b.hidden = true; show($("#popMsg")); }, 260);
+  setTimeout(() => { b.hidden = true; }, 260);
+  setTimeout(() => go("card"), 1400);
 };
-$("#bNext").onclick = () => go("card");
 
 /* =========== 4. FLYING CARD =========== */
 let flyT, caught = false;
