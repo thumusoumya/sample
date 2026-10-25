@@ -927,7 +927,7 @@ function placeL(t) {
   au(); if (typed.length >= NICK.length) return;
   typed.push({ ch: t.textContent, t }); t.classList.add("used"); tick(); paintSlots();
   if (typed.length === NICK.length) {
-    if (typed.map(o => o.ch).join("") === NICK) babluWin();
+    if (typed.map(o => o.ch).join("") === NICK) bobbyWin();
     else { bad(); const s = $("#slots"); s.classList.remove("shake"); void s.offsetWidth; s.classList.add("shake"); toast("Hmm… it starts with B 😉"); setTimeout(clearL, 600); }
   }
 }
